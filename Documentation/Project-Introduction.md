@@ -1,9 +1,29 @@
 # Project Introduction
 
 ## Team Members 
+- Thomas Safago
+- Kade Schrock
+- Nate Merz
+- Braxton Rider
+- Anna Gettinger
+
+For more information, please visit:
+- link...
 
 ## SDLC Information
+We will be using the SDLC Big Bang. As part of Big Bang, we will be pulling from the SDLCs Waterfall and Agile for different parts of documentation to keep our project on target.
 
 ## Project Idea
+For our project, we will be making a Plants vs. Zombies style game using the coding language Python and the module pygames. For our variant, we will be having food being shot at people with dietary issues.
+
+For more information, please visit: 
+- link...
 
 ## Project Documentation Format
+The project will pull from documentation requirements used in Waterfall and Agile. Specifically, we will include the following in our documentation:
+
+- Member Information
+- Project Requirements
+- Project Scope
+- Timeline
+- User Stories

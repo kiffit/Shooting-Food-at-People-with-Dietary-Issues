@@ -46,6 +46,26 @@ class GameController:
             0
         ))
 
+    #Getters
+    def get_plants(self):
+        return self.plants
+
+    def get_zombies(self):
+        return self.zombies
+
+    def get_projectiles(self):
+        return self.projectiles
+
+    #Setters
+    def set_plants(self, lists):
+        self.plants = lists
+
+    def set_zombies(self, lists):
+        self.zombies = lists
+
+    def set_projectiles(self, lists):
+        self.projectiles = lists
+
     # Tostring
     def __str__(self):
-        pass
+        return "\nPLANTS: " + str(self.get_plants()) + "\nZOMBIES: " + str(self.get_zombies()) + "\nPROJECTILES: " + str(self.get_projectiles())

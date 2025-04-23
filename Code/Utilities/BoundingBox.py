@@ -10,22 +10,22 @@ class BoundingBox:
         self.height = height
 
     # Methods
-    def intersects(self, other):
-        self_left = self.position.x - (self.width / 2)
-        self_right = self.position.x + (self.width / 2)
-        self_top = self.position.y - (self.height / 2)
-        self_bottom = self.position.y + (self.height / 2)
+    def overlaps(self, other):
+        self_left = self.position[0] - (self.width / 2)
+        self_right = self.position[0] + (self.width / 2)
+        self_top = self.position[1] - (self.height / 2)
+        self_bottom = self.position[1] + (self.height / 2)
 
-        other_left = other.position.x - (other.width / 2)
-        other_right = other.position.x + (other.width / 2)
-        other_top = other.position.y - (other.height / 2)
-        other_bottom = other.position.y + (other.height / 2)
+        other_left = other.position[0] - (other.width / 2)
+        other_right = other.position[0] + (other.width / 2)
+        other_top = other.position[1] - (other.height / 2)
+        other_bottom = other.position[1] + (other.height / 2)
 
         return (
-                self_left < other_right and
-                self_right > other_left and
-                self_top < other_bottom and
-                self_bottom > other_top
+                self_left <= other_right and
+                self_right >= other_left and
+                self_top <= other_bottom and
+                self_bottom >= other_top
         )
 
     # Getters
@@ -58,7 +58,7 @@ class BoundingBox:
     def __str__(self):
         return (
             f"BoundingBox:"
-            f"\n\tposition: {self.position}"
+            f"\n\tposition: [{self.position[0]}, {self.position[1]}]"
             f"\n\twidth: {self.width}"
             f"\n\theight: {self.height}"
         )

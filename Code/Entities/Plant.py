@@ -2,17 +2,31 @@
 # 04/21/2025
 
 
-from Entity import Entity
+from Code.Entities.Entity import Entity
 
 
 class Plant(Entity):
     # Attributes
 
     # Constructor
-    def __init__(self, name, description, aabb, position, health, damage, damage_type, action_interval, collision_action_interval):
-        super().__init__(name, description, aabb, position, health, damage, damage_type, action_interval, collision_action_interval)
+    def __init__(self, name, description, aabb, position, health, damage, damage_type, action_interval):
+        super().__init__(name, description, aabb, position, health, damage, damage_type, action_interval)
 
-    # Method
+    # Methods
+    def scheduled_action(self):
+        pass
+
+    def collision_action(self):
+        pass
+
+    def move(self):
+        pass
+
+    def attack(self):
+        pass
+
+    def die(self):
+        pass
 
     # Getter
 

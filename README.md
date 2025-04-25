@@ -11,7 +11,7 @@ Visit the [Project Introduction](https://github.com/kiffit/Shooting-Food-at-Peop
 - Braxton Rider
 - Anna Gettinger
 
-See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Team-Members) page.
+See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf) page.
 
 # 📚 Documentation
 - [Executive Summary](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Executive-Summary.md)

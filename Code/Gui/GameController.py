@@ -2,7 +2,7 @@
 # 04/22/2025
 
 
-from Code.Entities.Plant import Plant
+from Code.Entities.Plants.SugarCubeLauncher import SugarCubeLauncher
 from Code.Utilities.BoundingBox import BoundingBox
 
 
@@ -24,29 +24,10 @@ class GameController:
 
     # Methods
     def add_objects(self):
-        self.plants.append(Plant(
-            "Peashooter",
-            "Shoots peas",
-            BoundingBox([0, 0], 1, 1),
-            10,
-            10,
-            "organic",
-            5,
-            0
-        ))
+        self.plants.append(SugarCubeLauncher([0, 0]))
+        self.plants.append(SugarCubeLauncher([1, 1]))
 
-        self.plants.append(Plant(
-            "Peashooter",
-            "Shoots peas",
-            BoundingBox([2, 0], 0.5, 0.5),
-            10,
-            10,
-            "organic",
-            5,
-            0
-        ))
-
-    #Getters
+    # Getters
     def get_plants(self):
         return self.plants
 
@@ -56,7 +37,7 @@ class GameController:
     def get_projectiles(self):
         return self.projectiles
 
-    #Setters
+    # Setters
     def set_plants(self, lists):
         self.plants = lists
 

@@ -1,8 +1,10 @@
 # Eh Studios
 # 04/22/2025
-
+from random import randint, random
 
 import pygame
+
+from Code.Entities.Plants.SugarCubeLauncher import SugarCubeLauncher
 from Code.Gui.GameController import GameController
 from Code.Utilities.BoundingBox import BoundingBox
 
@@ -15,13 +17,16 @@ class GameWindow:
         self.running = False
         self.dtime = 0
 
+        # Last frames inputs, to avoid some issues
+        self.last_frame_inputs = []
+
         # Game controller
         self.game_controller = GameController()
 
         # Initialization
         self.init_pygame()
 
-    # Methods
+    # PYGAME METHODS
     def init_pygame(self):
         # Initialize pygame
         pygame.init()
@@ -32,25 +37,6 @@ class GameWindow:
 
         # Create clock for time management
         self.clock = pygame.time.Clock()
-
-    def handle_input(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
-
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_w]:
-            self.game_controller.plants[0].bbox.position[1] += 3 * self.dtime
-
-        if keys[pygame.K_a]:
-            self.game_controller.plants[0].bbox.position[0] -= 3 * self.dtime
-
-        if keys[pygame.K_s]:
-            self.game_controller.plants[0].bbox.position[1] -= 3 * self.dtime
-
-        if keys[pygame.K_d]:
-            self.game_controller.plants[0].bbox.position[0] += 3 * self.dtime
 
     def bbox_to_screen(self, bbox):
         screen_width, screen_height = self.screen.get_size()
@@ -92,6 +78,41 @@ class GameWindow:
         text_rect = text_surface.get_rect(center=(text_pos_x, text_pos_y))
         self.screen.blit(text_surface, text_rect)
 
+    # GAME CONTROL METHODS
+    def handle_input(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_w]:
+            self.game_controller.plants[0].bbox.position[1] += 3 * self.dtime
+
+        if keys[pygame.K_a]:
+            self.game_controller.plants[0].bbox.position[0] -= 3 * self.dtime
+
+        if keys[pygame.K_s]:
+            self.game_controller.plants[0].bbox.position[1] -= 3 * self.dtime
+
+        if keys[pygame.K_d]:
+            self.game_controller.plants[0].bbox.position[0] += 3 * self.dtime
+
+        if keys[pygame.K_TAB] and not self.last_frame_inputs[pygame.K_TAB]:
+            self.game_controller.plants.append(SugarCubeLauncher([random()*4 - 2, random()*2 - 1]))
+
+        self.last_frame_inputs = keys
+
+    def step(self):
+        # Step all finally
+        for entity in self.game_controller.plants + self.game_controller.zombies + self.game_controller.projectiles:
+            # Run scheduled action
+            if entity.action_interval > 0 and (pygame.time.get_ticks() / 1000 - entity.created_time) % entity.action_interval <= self.dtime:
+                entity.scheduled_action(self.game_controller)
+
+            # Movement
+            entity.move(self.dtime)
+
     def render(self):
         # Clear buffer
         self.screen.fill("black")
@@ -112,6 +133,7 @@ class GameWindow:
         # Running loop
         while self.running:
             self.handle_input()
+            self.step()
             self.render()
 
     # Properties

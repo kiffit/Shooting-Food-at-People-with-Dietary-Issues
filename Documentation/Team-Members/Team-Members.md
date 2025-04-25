@@ -1,10 +1,6 @@
 # Team Members
 ## Code Czar: Thomas Safago
-
-## Randolph HIPler: Kade Schrock (Adam approved this, ok?)
-
+## Bjorn Müller: Kade Schrock
 ## Architect of Doom: Nate Merz
-
 ## Admiral Strategist: Braxton Rider
-
 ## War Photojournalist: Anna Gettinger

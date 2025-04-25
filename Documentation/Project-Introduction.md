@@ -7,8 +7,7 @@
 - Braxton Rider
 - Anna Gettinger
 
-For more information, please visit:
-- link...
+For more information, please visit the [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf) page.
 
 ## SDLC Information
 We will be using the SDLC Big Bang. As part of Big Bang, we will be pulling from the SDLCs Waterfall and Agile for different parts of documentation to keep our project on target.

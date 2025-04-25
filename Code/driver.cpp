@@ -1,12 +1,11 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <thread>
+#include <SFML/Graphics.hpp>
+#include "GameController.h"
 
-
-
-void renderingThread(sf::RenderWindow *window) {
+void renderingThread(sf::RenderWindow *window, GameController *controller) {
     // Activate window context
-    window->setActive(true);
+    static_cast<void>(window->setActive(true));
 
     // Rendering loop
     while (window->isOpen()) {
@@ -14,9 +13,15 @@ void renderingThread(sf::RenderWindow *window) {
         window->clear(sf::Color::Black);
 
         // Draw level components
-        // Draw plants (VERTEX ARRAY)
-        // Draw zombies (VERTEX ARRAY)
-        // Draw projectiles (VERTEX ARRAY)
+        // Draw plants (VERTEX ARRAY?)
+        for (const auto *plant : controller->plants) {
+            auto rect = sf::RectangleShape(plant->get_hitbox().size);
+            rect.setPosition(plant->get_hitbox().position);
+            window->draw(rect);
+        }
+
+        // Draw zombies (VERTEX ARRAY?)
+        // Draw projectiles (VERTEX ARRAY?)
         // Draw UI elements
 
         // End frame, display
@@ -52,23 +57,27 @@ void handleEvents(sf::RenderWindow &window) {
 }
 
 int main() {
+    // Instantiate a GameController
+    auto gc = GameController();
+
     // Create the window, must be done in the main loop
     sf::RenderWindow window(sf::VideoMode({1280, 720}), "OpenGL");
     window.setFramerateLimit(60);
     window.setKeyRepeatEnabled(false);
 
     // Deactivate its OpenGL context
-    window.setActive(false);
+    static_cast<void>(window.setActive(false));
 
     // Launch the rendering thread
-    std::thread thread(&renderingThread, &window);
+    std::thread thread(&renderingThread, &window, &gc);
 
     // Game loop
     while (window.isOpen()) {
-        // Handle events!
+        // Handle events, including inputs
         handleEvents(window);
 
-        // Handle events!
+        // Game processing
+
     }
 
     thread.join();

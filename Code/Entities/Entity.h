@@ -11,14 +11,14 @@ class Entity {
     sf::Time lifetime;
     bool alive = false;
 
-    // Common entity class attributes
+    // Common entity class attributes (for things like Plants, Zombies, Projectiles inherited from Entity)
     std::string team;
 
-    // Common implemented entity class attributes
+    // Common inherited entity team attributes (ex. Peashooter inheriting Plant)
     std::string name;
     std::string description;
     std::string damage_type;
-    float health = -1;
+    float health = 0;
 
 public:
     // Constructor
@@ -34,6 +34,8 @@ public:
     virtual void update(sf::Time &elapsed) = 0;
 
     virtual void onCollision(Entity &other) = 0;
+
+    virtual void die() = 0;
 
     // Getters
     [[nodiscard]] sf::Rect<float> get_hitbox() const {
@@ -102,7 +104,7 @@ public:
     }
 
     // To string
-    std::string to_string() const {
+    [[nodiscard]] std::string to_string() const {
         std::stringstream ss;
         ss << "Entity:"
                 << "\n\tName: " << get_name()
@@ -110,6 +112,16 @@ public:
                 << "\n\tDamage type: " << get_damage_type()
                 << "\n\tHealth: " << get_health()
                 << "\n\tLifetime: " << get_lifetime().asMilliseconds() << "ms";
+        return ss.str();
+    }
+
+    [[nodiscard]] std::string debug_string() const {
+        std::stringstream ss;
+        ss
+                << "Name: " << get_name()
+                << "\nPosition: " << get_hitbox().position.x << ", " << get_hitbox().position.y
+                << "\nHealth: " << get_health()
+                << "\nLifetime: " << get_lifetime().asMilliseconds();
         return ss.str();
     }
 };

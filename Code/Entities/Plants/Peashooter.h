@@ -14,14 +14,20 @@ public:
 
     // Methods
     void update(sf::Time &elapsed) override {
+        // Update lifetime
         set_lifetime(get_lifetime() + elapsed);
+
+        // If it has been x time, fire a pea
+        set_health(get_health() - 5 * elapsed.asSeconds());
     }
 
     void onCollision(Entity &other) override {
+    }
 
+    void die() override {
+        std::cout << "damn ded" << std::endl;
     }
 };
-
 
 
 #endif //PEASHOOTER_H

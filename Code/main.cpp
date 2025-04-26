@@ -4,7 +4,7 @@
 #include "GameController.h"
 #include "Entities/Plants/Peashooter.h"
 
-void renderingThread(sf::RenderWindow *window, const GameController *controller, sf::Text *text) {
+void renderingThread(sf::RenderWindow *window, GameController *controller, sf::Text *text) {
     // Activate window context
     static_cast<void>(window->setActive(true));
 
@@ -13,10 +13,24 @@ void renderingThread(sf::RenderWindow *window, const GameController *controller,
         // Clear buffer
         window->clear(sf::Color::Black);
 
+        // Copy front buffers of entities for rendering
+        std::vector<std::shared_ptr<Entity>> plants;
+        std::vector<std::shared_ptr<Entity>> zombies;
+        std::vector<std::shared_ptr<Entity>> projectiles;
+        {
+            std::scoped_lock lock(controller->mutex_lock);
+            plants = controller->plants_front;
+            zombies = controller->zombies_front;
+            projectiles = controller->projectiles_front;
+        }
+
+        // Render each snapshot
+
+
         // Draw level components
 
         // Draw plants (VERTEX ARRAY?)
-        for (const auto &plant: controller->plants) {
+        for (const auto &plant: plants) {
             // Draw rectangle of plant
             auto renderRectangle = sf::RectangleShape(plant->get_hitbox().size);
             renderRectangle.setPosition(plant->get_hitbox().position);
@@ -31,6 +45,17 @@ void renderingThread(sf::RenderWindow *window, const GameController *controller,
         // Draw zombies (VERTEX ARRAY?)
 
         // Draw projectiles (VERTEX ARRAY?)
+        for (const auto &plant: projectiles) {
+            // Draw rectangle of plant
+            auto renderRectangle = sf::RectangleShape(plant->get_hitbox().size);
+            renderRectangle.setPosition(plant->get_hitbox().position);
+            window->draw(renderRectangle);
+
+            // Draw text for that bad boy
+            text->setString(plant->debug_string());
+            text->setPosition(plant->get_hitbox().position);
+            window->draw(*text);
+        }
 
         // Draw UI elements
 
@@ -39,7 +64,7 @@ void renderingThread(sf::RenderWindow *window, const GameController *controller,
     }
 }
 
-void handleEvents(sf::RenderWindow &window) {
+void handleEvents(sf::RenderWindow &window, GameController &gc) {
     while (const auto event = window.pollEvent()) {
         // Handle close events
         if (event->is<sf::Event::Closed>())
@@ -52,7 +77,7 @@ void handleEvents(sf::RenderWindow &window) {
                 window.close();
 
             if (keyPressed->scancode == sf::Keyboard::Scancode::Space)
-                std::cout << "space in" << std::endl;
+                gc.cleanup();
         }
 
         // Handle input releases
@@ -85,8 +110,8 @@ int main() {
     text.setFillColor(sf::Color::Black);
 
     /* OLD: MAKE A LOT OF ENTITIES */
-    for (int i = 0; i < 200; i++) {
-        gc.plants.push_back(std::make_shared<Peashooter>(sf::Vector2f(100, 100) * static_cast<float>(i)));
+    for (int i = 0; i < 10; i++) {
+        gc.plants_back.push_back(std::make_shared<Peashooter>(sf::Vector2f(100, 100) * static_cast<float>(i)));
     }
 
     // Launch the rendering thread
@@ -98,10 +123,12 @@ int main() {
         auto elapsed = clock.restart();
 
         // Handle events, including inputs
-        handleEvents(window);
+        handleEvents(window, gc);
 
         // Game processing
         gc.update(elapsed);
+
+        std::cout << "Physics Frame for [" << gc.projectiles_front.size() + gc.zombies_front.size() + gc.plants_front.size() << "] entities: " << elapsed.asSeconds() << std::endl;
     }
 
     thread.join();

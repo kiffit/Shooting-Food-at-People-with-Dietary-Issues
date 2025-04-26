@@ -1,8 +1,10 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-
-
 #include <SFML/Graphics.hpp>
+
+
+// Forward declaration
+class GameController;
 
 
 class Entity {
@@ -10,8 +12,6 @@ class Entity {
     sf::Rect<float> hitbox;
     sf::Time lifetime;
     bool alive = false;
-
-    // Common entity class attributes (for things like Plants, Zombies, Projectiles inherited from Entity)
     std::string team;
 
     // Common inherited entity team attributes (ex. Peashooter inheriting Plant)
@@ -31,7 +31,7 @@ public:
     // Virtual methods
     virtual ~Entity() = default;
 
-    virtual void update(sf::Time &elapsed) = 0;
+    virtual void update(sf::Time &elapsed, GameController &gc) = 0;
 
     virtual void onCollision(Entity &other) = 0;
 
@@ -46,12 +46,12 @@ public:
         return lifetime;
     }
 
-    [[nodiscard]] float get_health() const {
-        return health;
-    }
-
     [[nodiscard]] bool is_alive() const {
         return alive;
+    }
+
+    [[nodiscard]] std::string get_team() const {
+        return team;
     }
 
     [[nodiscard]] std::string get_name() const {
@@ -62,12 +62,12 @@ public:
         return description;
     }
 
-    [[nodiscard]] std::string get_team() const {
-        return team;
-    }
-
     [[nodiscard]] std::string get_damage_type() const {
         return damage_type;
+    }
+
+    [[nodiscard]] float get_health() const {
+        return health;
     }
 
     // Setters
@@ -79,12 +79,12 @@ public:
         this->lifetime = lifetime;
     }
 
-    void set_health(const float health) {
-        this->health = health;
-    }
-
     void set_alive(const bool alive) {
         this->alive = alive;
+    }
+
+    void set_team(const std::string &team) {
+        this->team = team;
     }
 
     void set_name(const std::string &name) {
@@ -95,12 +95,12 @@ public:
         this->description = description;
     }
 
-    void set_team(const std::string &team) {
-        this->team = team;
-    }
-
     void set_damage_type(const std::string &damage_type) {
         this->damage_type = damage_type;
+    }
+
+    void set_health(const float health) {
+        this->health = health;
     }
 
     // To string

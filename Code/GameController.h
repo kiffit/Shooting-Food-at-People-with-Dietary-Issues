@@ -2,27 +2,32 @@
 #define GAMECONTROLLER_H
 
 #include <algorithm>
+#include <mutex>
 #include <vector>
 #include "Entities/Entity.h"
+
+/*
+ * Hello!
+ * Big note: we can store time in entities.
+ * It updates every frame. If it exceeds a certain interval, they can call an action and reset it.
+ * We can probably speed this idea up a little with some thinking.
+ */
 
 class GameController {
 public:
     // Attributes
-    std::vector<std::shared_ptr<Entity> > plants;
-    std::vector<std::shared_ptr<Entity> > zombies;
-    std::vector<std::shared_ptr<Entity> > projectiles;
+    std::vector<std::shared_ptr<Entity> > plants_front, plants_back;
+    std::vector<std::shared_ptr<Entity> > zombies_front, zombies_back;
+    std::vector<std::shared_ptr<Entity> > projectiles_front, projectiles_back;
+    std::mutex mutex_lock;
 
     // Constructor
-    GameController() {
-        plants.clear();
-        zombies.clear();
-        projectiles.clear();
-    }
+    GameController() = default;
 
     // Methods
-    static void updateList(std::vector<std::shared_ptr<Entity> > &list, sf::Time &elapsed) {
+    void updateList(std::vector<std::shared_ptr<Entity> > &list, sf::Time &elapsed) {
         for (const auto &entity: list) {
-            entity->update(elapsed);
+            entity->update(elapsed, *this);
         }
 
         // Remove dead ones after update pass
@@ -38,12 +43,31 @@ public:
             list.end());
     }
 
-
     void update(sf::Time &elapsed) {
         // Update plants, zombies, and projectiles step, will delete all dead entities
-        updateList(plants, elapsed);
-        updateList(zombies, elapsed);
-        updateList(projectiles, elapsed);
+        updateList(plants_back, elapsed);
+        updateList(zombies_back, elapsed);
+        updateList(projectiles_back, elapsed);
+
+        // Swap buffers, necessary for avoiding race conditions and segfaults between the controller and window
+        swapBuffers();
+    }
+
+    void swapBuffers() {
+        std::scoped_lock lock(mutex_lock);
+        plants_front = plants_back;
+        zombies_front = zombies_back;
+        projectiles_front = projectiles_back;
+    }
+
+    void cleanup() {
+        std::scoped_lock lock(mutex_lock);
+        plants_front.clear();
+        plants_back.clear();
+        zombies_front.clear();
+        zombies_back.clear();
+        projectiles_front.clear();
+        projectiles_back.clear();
     }
 };
 

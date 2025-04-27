@@ -20,8 +20,10 @@ For more information, please visit the [Executive Summary](https://github.com/ki
 ## Project Documentation Format
 The project will pull from documentation requirements used in Waterfall and Agile. Specifically, we will include the following in our documentation:
 
-- [Member Information]((https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf))
+- [Member Information](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf)
 - [Executive Summary](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Executive-Summary.md)
-- Project Scope
-- Timeline
-- User Stories
+- [Project Scope](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Scope.md)
+- [Timeline & Milestones](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Timeline)
+- [User Stories](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/User-Stories)
+
+A first version of all of these items will be completed Week 1. Adjustments may be made in the following weeks because of any changes in the project as needed.

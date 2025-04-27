@@ -27,10 +27,9 @@ See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietar
 - [Class UMLs #2](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Class-UMLs(2).drawio.pdf)
 
 ## 🧑🏻‍💻 Code
-- [Main](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/driver.py)
+- [Main](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/main.cpp)
+- [Game Controller](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/GameController.h)
 - [Entity Classes](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Code/Entities)
-- [GUI Classes](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Code/Gui)
-- [Utility Classes](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Code/Utilities)
 
 ## 📚 Documentation
 - [Executive Summary](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Executive-Summary.md)

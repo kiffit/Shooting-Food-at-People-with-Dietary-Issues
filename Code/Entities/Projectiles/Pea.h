@@ -8,13 +8,15 @@
 #define PEA_DAMAGE 3
 #define PEA_SPEED 500
 
+
 class Pea final : public Entity {
 public:
-    explicit Pea(const sf::Vector2f &pos) : Entity({pos, {PEA_HITBOX_W, PEA_HITBOX_W}}) {
+    explicit Pea(const sf::Vector2f &pos) : Entity(pos, {PEA_HITBOX_W, PEA_HITBOX_W}) {
         set_name("Pea");
         set_description("Peas on enemies.");
         set_team("projectiles");
         set_damage_type("organic");
+        set_interval(sf::seconds(3));
         set_health(100);
     }
 
@@ -24,7 +26,7 @@ public:
         set_lifetime(get_lifetime() + elapsed);
 
         // Move pea
-        set_hitbox({get_hitbox().position + sf::Vector2f(PEA_SPEED * elapsed.asSeconds(), 0), get_hitbox().size});
+        move({PEA_SPEED * elapsed.asSeconds(), 0});
 
         // Kill pea if it ain't doing something
         if (get_lifetime().asSeconds() > 10)
@@ -41,7 +43,7 @@ public:
         set_health(0);
     }
 
-    void die() override {
+    void onDie() override {
         std::cout << "damn ded" << std::endl;
     }
 };

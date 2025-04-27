@@ -35,7 +35,7 @@ public:
             std::remove_if(list.begin(), list.end(),
                            [](const std::shared_ptr<Entity> &e) {
                                if (e->get_health() <= 0) {
-                                   e->die();
+                                   e->onDie();
                                    return true;
                                }
                                return false;

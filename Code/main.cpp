@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameController.h"
 #include "Entities/Plants/Peashooter.h"
+#include "Entities/Zombies/RegularJoe.h"
 
 void renderingThread(sf::RenderWindow *window, GameController *controller, sf::Text *text) {
     // Activate window context
@@ -43,6 +44,17 @@ void renderingThread(sf::RenderWindow *window, GameController *controller, sf::T
         }
 
         // Draw zombies (VERTEX ARRAY?)
+        for (const auto &plant: zombies) {
+            // Draw rectangle of plant
+            auto renderRectangle = sf::RectangleShape(plant->get_hitbox().size);
+            renderRectangle.setPosition(plant->get_hitbox().position);
+            window->draw(renderRectangle);
+
+            // Draw text for that bad boy
+            text->setString(plant->debug_string());
+            text->setPosition(plant->get_hitbox().position);
+            window->draw(*text);
+        }
 
         // Draw projectiles (VERTEX ARRAY?)
         for (const auto &plant: projectiles) {
@@ -110,8 +122,9 @@ int main() {
     text.setFillColor(sf::Color::Black);
 
     /* OLD: MAKE A LOT OF ENTITIES */
-    for (int i = 0; i < 10; i++) {
-        gc.plants_back.push_back(std::make_shared<Peashooter>(sf::Vector2f(100, 100) * static_cast<float>(i)));
+    for (int i = 0; i < 5; i++) {
+        gc.plants_back.push_back(std::make_shared<Peashooter>(sf::Vector2f(0, 110) * static_cast<float>(i)));
+        gc.zombies_back.push_back(std::make_shared<RegularJoe>(sf::Vector2f(200, 0) + sf::Vector2f(50, 110) * static_cast<float>(i)));
     }
 
     // Launch the rendering thread

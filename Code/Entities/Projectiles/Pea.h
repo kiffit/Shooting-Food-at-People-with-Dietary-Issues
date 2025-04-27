@@ -5,7 +5,7 @@
 
 #define PEA_HITBOX_W 10
 #define PEA_HITBOX_H 10
-#define PEA_DAMAGE 3
+#define PEA_DAMAGE 2
 #define PEA_SPEED 500
 
 
@@ -44,7 +44,6 @@ public:
     }
 
     void onDie() override {
-        std::cout << "damn ded" << std::endl;
     }
 };
 

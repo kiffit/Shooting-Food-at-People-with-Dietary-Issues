@@ -3,4 +3,4 @@ The project Shooting Food at People with Dietary Issues aims to replicate a simi
 
 This project aims to solve the problem of boredom. There is simply never enough entertainment to keep the depression at bay. Thus, we, as health warriors, want to assist by creating a game that will assuredly occupy people for at least one hour.
 
-Gameplay will be implemented using C++. The game will have a fully functional GUI with handdrawn art. The game will be able to be played through the CLion IDE.
+Gameplay will be implemented using C++. The game will have a fully functional GUI with hand drawn art. The game will be able to be played through the CLion IDE.

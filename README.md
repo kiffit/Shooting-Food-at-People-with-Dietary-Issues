@@ -5,7 +5,7 @@ In the style of our chosen SDLC, the process for our project will be very fluid.
 
 In order to have a semblance of structure, there will be documentation elements borrowed from both Waterfall and Agile. Specifically, we will have an Executive Summary, which will include a brief explanation of the program, information about the coding language used, and what problem is being solved; Scope, which will go over what the program will and will not include; Timeline, which includes information about planned progress and project milestones; and User Stories, which will guide how the program will be developed through what the user wants to see in the project.
 
-Further information about our project can be found in the Quick Facts page and other documentation below.
+Further information about our project can be found in the Project Introduction page and other documentation below.
 
 ## 📝 Quick Facts
 Want a quick rundown of the project? Visit the [Project Introduction](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Project-Introduction.md) page.

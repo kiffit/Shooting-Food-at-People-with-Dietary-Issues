@@ -23,7 +23,7 @@ See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietar
 - [Problem Frame](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SPWDI-Problem-Frame(1).drawio.pdf)
 - [Level 0 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL0(1).drawio.pdf)
 - [Level 1 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL1(1).drawio.pdf)
-- [Class UMLs](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SPWDI-Class-UMLs(3).drawio.pdf)
+- [Class UMLs](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Class-UMLs(3).drawio.pdf)
 
 
 ## 🧑🏻‍💻 Code

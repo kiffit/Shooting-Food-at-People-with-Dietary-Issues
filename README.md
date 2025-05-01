@@ -10,7 +10,7 @@ Further information about our project can be found in the Project Introduction p
 ## 📝 Quick Facts
 Want a quick rundown of the project? Visit the [Project Introduction](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Project-Introduction.md) page.
 
-## News Blast!
+## 🗞️ News Blast!
 Read the latest team updates through [The Dietary Daily News](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/News-Updates).
 
 ## Meet the Team 🧍🏻‍♂️🧍🏼‍♂️🧍🏼‍♂️🧍🏽‍♂️🧍🏻‍♀️

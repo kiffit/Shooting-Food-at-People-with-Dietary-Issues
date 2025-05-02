@@ -28,11 +28,18 @@ See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietar
 - [Level 1 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL1(1).drawio.pdf)
 - [Class UMLs](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Class-UMLs(3).drawio.pdf)
 
-
 ## 🧑🏻‍💻 Code
 - [Main](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/main.cpp)
-- [Game Controller](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/GameController.h)
+- [World](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/World.h)
+- [Game Controller #1](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/GameController.h)
+- [Game Controller #2](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/GameController.cpp)
 - [Entity Classes](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Code/Entities)
+- [Components](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Code/Components)
+
+## 🎨 Art 
+- [Art Mockups](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Design/Art-Mockups)
+- [Art Screenshots](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Design/Art-Screenshots)
+- [Sprites](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Design/Sprites)
 
 ## 📚 Documentation
 - [Executive Summary](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Executive-Summary.md)

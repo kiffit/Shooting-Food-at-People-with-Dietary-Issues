@@ -6,38 +6,35 @@
 class Entity {
 public:
     // Public attributes
-    sf::Vector2f position{0, 0};
-    sf::Vector2f velocity{0, 0};
+    sf::FloatRect hitbox;
+    sf::Vector2f velocity;
+    std::string damage_type;
     float health = 1;
 
+
     // Constructor
-    Entity(InputComponent *input, PhysicsComponent *physics, GraphicsComponent *graphics)
-        : input_(input), physics_(physics), graphics_(graphics) {
+    Entity(MovementComponent *movement, AttackComponent *attack, GraphicsComponent *graphics)
+        : movement_(movement), attack_(attack), graphics_(graphics) {
     }
 
     // Methods
     void update(World &world, const float elapsed) {
-        input_->update(*this, world);
-        physics_->update(*this, world, elapsed);
+        movement_->update(*this, world, elapsed);
+        attack_->update(*this, world, elapsed);
         graphics_->update(*this, elapsed);
     }
 
-    // Getters
-    [[nodiscard]] InputComponent *getInputComponent() const {
-        return input_;
+    void resolveCollision(Entity &other) {
+        attack_->onCollision(*this, other);
     }
 
-    [[nodiscard]] PhysicsComponent *getPhysicsComponent() const {
-        return physics_;
-    }
-
-    [[nodiscard]] GraphicsComponent *getGraphicsComponent() const {
-        return graphics_;
+    const sf::Drawable *getDrawable() {
+        return &graphics_->drawable(*this);
     }
 
 private:
-    InputComponent *input_;
-    PhysicsComponent *physics_;
+    MovementComponent *movement_;
+    AttackComponent *attack_;
     GraphicsComponent *graphics_;
 };
 

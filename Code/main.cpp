@@ -96,14 +96,13 @@ int main() {
         world.addPlant(epipenPlant({200, 100.0f * x}));
         world.addPlant(baguettePlant({100, 100.0f * x}));
         world.addPlant(soybeanMinigunPlant({0, 100.0f * x}));
-        world.addZombie(soyZombie({500 + 100.0f * x, 100.0f * x}));
-        world.addZombie(glutenZombie({700 + 100.0f * x, 100.0f * x}));
     }
 
     // Launch the rendering thread
     std::thread thread(&renderingThread, &window, &world);
 
     int i = 0;
+    float t = 0;
 
     // Game loop
     while (window.isOpen()) {
@@ -115,6 +114,14 @@ int main() {
             // "close requested" event: we close the window
             if (event->is<sf::Event::Closed>())
                 window.close();
+        }
+
+        // TEMP: Zombie apocalypse
+        t += elapsed.asSeconds();
+        if (t >= 0.5) {
+            world.addZombie(glutenZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
+            world.addZombie(soyZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
+            t = 0;
         }
 
         // Mouse

@@ -96,7 +96,7 @@ public:
 
     [[nodiscard]] bool canSeeZombie(const Entity &entity) const {
         auto row_hitbox = entity.hitbox;
-        row_hitbox.size.x = screen_hitbox_.size.x;
+        row_hitbox.size.x = shoot_range_.size.x;
         row_hitbox.size.y = 1;
         row_hitbox.position.y += entity.hitbox.size.y / 2;
 
@@ -120,6 +120,7 @@ private:
     std::vector<Entity *> zombies_;
     std::vector<Entity *> projectiles_;
     sf::FloatRect screen_hitbox_ = {{0, 0}, {1920, 1080}};
+    sf::FloatRect shoot_range_ = {{0, 0}, {1500, 1080}};
     sf::FloatRect world_hitbox_ = {{0, 0}, {1900, 900}};
     std::mutex drawables_mutex_;
 

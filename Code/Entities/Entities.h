@@ -17,7 +17,7 @@ inline Entity *epipenProjectile(const sf::Vector2f &position) {
 };
 
 inline Entity *soybeanMinigunProjectile(const sf::Vector2f &position) {
-    constexpr sf::Vector2f velocity = {1000, 0};
+    constexpr sf::Vector2f velocity = {4000, 0};
     constexpr sf::Vector2f hitbox_size = {PROJECTILE_HITBOX_WIDTH, PROJECTILE_HITBOX_HEIGHT};
     constexpr float damage = 0.2;
 
@@ -29,7 +29,7 @@ inline Entity *soybeanMinigunProjectile(const sf::Vector2f &position) {
 };
 
 inline Entity *baguetteProjectile(const sf::Vector2f &position) {
-    constexpr sf::Vector2f velocity = {400, 0};
+    constexpr sf::Vector2f velocity = {800, 0};
     constexpr sf::Vector2f hitbox_size = {PROJECTILE_HITBOX_WIDTH, PROJECTILE_HITBOX_HEIGHT};
     constexpr float damage = 4;
 
@@ -73,12 +73,12 @@ inline Entity *soybeanMinigunPlant(const sf::Vector2f &position) {
 };
 
 inline Entity *baguettePlant(const sf::Vector2f &position) {
-    constexpr float interval = 2;
+    constexpr float interval = 1;
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 8;
     constexpr float epipens = 4;
 
-    const auto entity = new Entity(new DraggableMovementComponent(), new PlantAttackComponent(baguetteProjectile, interval), new PlantGraphicsComponent("../Code/Entities/Sprites/baguette_0.png", "../Code/Entities/Sprites/baguette_1.png"));
+    const auto entity = new Entity(new DraggableMovementComponent(), new PlantAttackComponent(baguetteProjectile, interval), new PlantGraphicsComponent("../Code/Entities/Sprites/baguette_0.png", "../Code/Entities/Sprites/baguette_1.png", interval / 2));
     entity->hitbox.position = position;
     entity->hitbox.size = hitbox_size;
     entity->health = health;
@@ -93,7 +93,7 @@ inline Entity *soyZombie(const sf::Vector2f &position) {
     constexpr float interval = 2;
     constexpr float damage = 3;
     constexpr sf::Vector2f hitbox_size = {ZOMBIE_HITBOX_WIDTH, ZOMBIE_HITBOX_HEIGHT};
-    constexpr float health = 10;
+    constexpr float health = 20;
 
     const auto entity = new Entity(new ZombieMovementComponent({-100, 0}), new ZombieAttackComponent(damage, interval), new ZombieGraphicsComponent("../Code/Entities/Sprites/soyboy_0.png", "../Code/Entities/Sprites/soyboy_1.png"));
     entity->hitbox.position = position;
@@ -107,7 +107,7 @@ inline Entity *glutenZombie(const sf::Vector2f &position) {
     constexpr float interval = 1;
     constexpr float damage = 1;
     constexpr sf::Vector2f hitbox_size = {ZOMBIE_HITBOX_WIDTH, ZOMBIE_HITBOX_HEIGHT};
-    constexpr float health = 10;
+    constexpr float health = 20;
 
     const auto entity = new Entity(new ZombieMovementComponent({-50, 0}), new ZombieAttackComponent(damage, interval), new ZombieGraphicsComponent("../Code/Entities/Sprites/gluten_0.png", "../Code/Entities/Sprites/gluten_1.png"));
     entity->hitbox.position = position;

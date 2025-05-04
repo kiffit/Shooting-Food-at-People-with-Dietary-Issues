@@ -10,7 +10,9 @@ public:
     sf::Vector2f velocity;
     std::string damage_type;
     float health = 1;
-
+    float epipen_cost = 0;
+    bool attacking = false;
+    bool row_based = true;
 
     // Constructor
     Entity(MovementComponent *movement, AttackComponent *attack, GraphicsComponent *graphics)

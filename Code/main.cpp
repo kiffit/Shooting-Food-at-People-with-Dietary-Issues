@@ -43,7 +43,7 @@ void renderingThread(sf::RenderWindow *window, World *world) {
         std::cout << "Shader failed to load!" << std::endl;
 
     // Background
-    const auto backgroundTexture = sf::Texture("../Code/Entities/Sprites/map.png");
+    const auto backgroundTexture = sf::Texture("../Design/Sprites/map.png");
     const auto background = sf::Sprite(backgroundTexture);
 
     // Rendering loop
@@ -67,9 +67,11 @@ void renderingThread(sf::RenderWindow *window, World *world) {
 
         // Draw projectiles
         for (const auto &drawable: world->getProjectileDrawables())
-            window->draw(*drawable);
+            window->draw(*drawable, &shader);
 
         // Draw UI elements
+        for (const auto &drawable: world->getShopItemDrawables())
+            window->draw(*drawable, &shader);
 
         // End frame, display
         window->display();
@@ -91,18 +93,23 @@ int main() {
     // Instantiate a new world
     auto world = World();
 
-    /* EXAMPLE: Add entities */
-    for (int x = 0; x < 9; ++x) {
-        world.addPlant(epipenPlant({200, 100.0f * x}));
-        world.addPlant(baguettePlant({100, 100.0f * x}));
-        world.addPlant(soybeanMinigunPlant({0, 100.0f * x}));
-    }
+    // Make the world store
+    auto epipen_plant_store = epipenPlantStore({0, 900});
+    auto soy_minigun_plant_store = soybeanMinigunPlantStore({100, 900});
+    auto baguette_launcher_plant_store = baguetteStore({200, 900});
+    auto milk_store = milkStore({300, 900});
+
+    world.addShopItem(epipen_plant_store);
+    world.addShopItem(soy_minigun_plant_store);
+    world.addShopItem(baguette_launcher_plant_store);
+    world.addShopItem(milk_store);
 
     // Launch the rendering thread
     std::thread thread(&renderingThread, &window, &world);
 
     int i = 0;
-    float t = 0;
+    float sun_time = 0;
+    float z = 0;
 
     // Game loop
     while (window.isOpen()) {
@@ -117,11 +124,18 @@ int main() {
         }
 
         // TEMP: Zombie apocalypse
-        t += elapsed.asSeconds();
-        if (t >= 0.5) {
+        z += elapsed.asSeconds();
+        if (z >= 0.5) {
             world.addZombie(glutenZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
             world.addZombie(soyZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
-            t = 0;
+            z = 0;
+        }
+
+        // Add random sun
+        sun_time += elapsed.asSeconds();
+        if (sun_time >= 80) {
+            world.addProjectile(epipenProjectile({static_cast<float>(std::rand() % 18) * 100, static_cast<float>(std::rand() % 9) * 100}));
+            sun_time = 0;
         }
 
         // Mouse

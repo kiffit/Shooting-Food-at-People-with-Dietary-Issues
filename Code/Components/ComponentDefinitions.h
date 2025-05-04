@@ -6,6 +6,8 @@
 #include <cmath>
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "../Entities/Entity.h"
+#include "SFML/Audio/Sound.hpp"
+#include "SFML/Audio/SoundBuffer.hpp"
 
 #define PLANT_HITBOX_WIDTH 100
 #define PLANT_HITBOX_HEIGHT 100
@@ -31,8 +33,9 @@ public:
 
 class PlantAttackComponent final : public AttackComponent {
 public:
-    PlantAttackComponent(const std::function<Entity *(sf::Vector2f)> &projectile_spawner, const float interval)
-        : interval_(interval), projectile_spawner_(projectile_spawner) {
+    PlantAttackComponent(const std::function<Entity *(sf::Vector2f)> &projectile_spawner, const std::string &sound_file_path, const float volume, const float interval)
+        : interval_(interval), buffer_(sf::SoundBuffer(sound_file_path)), projectile_spawner_(projectile_spawner) {
+        sound_.setVolume(volume);
     }
 
     void update(Entity &entity, World &world, const float elapsed) override {
@@ -42,8 +45,9 @@ public:
         // Action upon time interval
         if (time_ >= interval_ && (!entity.row_based || world.canSeeZombie(entity))) {
             entity.attacking = true;
-            world.addProjectile(projectile_spawner_(entity.hitbox.position + entity.hitbox.size / 3.f));
+            world.addProjectile(projectile_spawner_({entity.hitbox.position.x, entity.hitbox.position.y + PLANT_HITBOX_HEIGHT / 2.f - PROJECTILE_HITBOX_HEIGHT / 4.f}));
             time_ = 0;
+            sound_.play();
         } else
             entity.attacking = false;
     }
@@ -54,13 +58,17 @@ public:
 private:
     float time_ = 0;
     float interval_ = 0;
+    sf::SoundBuffer buffer_;
+    sf::Sound sound_ = sf::Sound(buffer_);
     std::function<Entity *(sf::Vector2f)> projectile_spawner_;
 };
 
 class PlantGraphicsComponent final : public GraphicsComponent {
 public:
-    PlantGraphicsComponent(const std::string &texture_idle_path, const std::string &texture_move_path, const float anim_interval = PLANT_ANIMATION_TIME)
-    : texture_idle_(new sf::Texture(texture_idle_path)), texture_move_(new sf::Texture(texture_move_path)), anim_interval_(anim_interval) {
+    PlantGraphicsComponent(const std::string &texture_idle_path, const std::string &texture_move_path,
+                           const float anim_interval = PLANT_ANIMATION_TIME)
+        : texture_idle_(new sf::Texture(texture_idle_path)), texture_move_(new sf::Texture(texture_move_path)),
+          anim_interval_(anim_interval) {
         shape_.setSize({COMMON_TEXTURE_SIZE, COMMON_TEXTURE_SIZE});
         shape_.setTexture(texture_idle_);
     }
@@ -132,8 +140,10 @@ private:
 
 class ZombieGraphicsComponent final : public GraphicsComponent {
 public:
-    ZombieGraphicsComponent(const std::string &texture_idle_path, const std::string &texture_move_path, const float anim_interval = ZOMBIE_ANIMATION_TIME)
-    : texture_idle_(new sf::Texture(texture_idle_path)), texture_move_(new sf::Texture(texture_move_path)), anim_interval_(anim_interval) {
+    ZombieGraphicsComponent(const std::string &texture_idle_path, const std::string &texture_move_path,
+                            const float anim_interval = ZOMBIE_ANIMATION_TIME)
+        : texture_idle_(new sf::Texture(texture_idle_path)), texture_move_(new sf::Texture(texture_move_path)),
+          anim_interval_(anim_interval) {
         shape_.setSize({COMMON_TEXTURE_SIZE, COMMON_TEXTURE_SIZE});
         shape_.setTexture(texture_idle_);
     }
@@ -183,7 +193,8 @@ private:
 
 class ProjectileAttackComponent final : public AttackComponent {
 public:
-    explicit ProjectileAttackComponent(const float damage, const float lifetime = 0) : lifetime_(lifetime), damage_(damage) {
+    explicit ProjectileAttackComponent(const float damage, const float lifetime = 0) : lifetime_(lifetime),
+        damage_(damage) {
     }
 
     void update(Entity &entity, World &world, const float elapsed) override {
@@ -211,33 +222,40 @@ private:
 
 class ProjectileGraphicsComponent final : public GraphicsComponent {
 public:
-    ProjectileGraphicsComponent() {
+    explicit ProjectileGraphicsComponent(const std::string &texture_path) : texture_idle_(
+        new sf::Texture(texture_path)) {
         shape_.setSize({PROJECTILE_HITBOX_WIDTH, PROJECTILE_HITBOX_HEIGHT});
-        shape_.setFillColor(sf::Color::Blue);
+        shape_.setTexture(texture_idle_);
     }
 
     void update(Entity &entity, float) override {
-        shape_.setPosition(entity.hitbox.position);
     }
 
     const sf::Drawable &drawable(Entity &entity) override {
         shape_.setPosition(entity.hitbox.position);
+        shape_.setSize(entity.hitbox.size);
         return shape_;
     }
 
 private:
     sf::RectangleShape shape_;
+    sf::Texture *texture_idle_;
 };
 
 /* ------------------------------------------------------------------------------------------------ */
-/* DRAG COMPONENT */
+/* STORE COMPONENTS */
 /* ------------------------------------------------------------------------------------------------ */
-class DraggableMovementComponent final : public MovementComponent {
+class StoreMovementComponent final : public MovementComponent {
 public:
+    explicit StoreMovementComponent(const std::function<Entity *(sf::Vector2f)> &plant_spawner)
+        : plant_spawner_(plant_spawner) {
+    }
+
     void update(Entity &entity, World &world, float elapsed) override {
         const auto mousePos = world.getMousePosition();
         const auto hitbox = sf::FloatRect(entity.hitbox.position, entity.hitbox.size);
         const bool isPressed = world.getMousePressed();
+        entity.health = 1000000;
 
         if (isPressed) {
             if (!dragging_last_ && !dragging_ && hitbox.contains(mousePos)) {
@@ -251,15 +269,22 @@ public:
             }
         } else {
             if (dragging_) {
-                // Snap to nearest multiple of multiples_ on release
                 const sf::Vector2f rawPos = mousePos - offset_;
-                entity.hitbox.position = {
+                const sf::Vector2f snapped = {
                     std::round(rawPos.x / multiples_.x) * multiples_.x,
                     std::round(rawPos.y / multiples_.y) * multiples_.y
                 };
-                if (world.touchesPlant(entity))
-                    entity.hitbox.position = old_position_;
+                entity.hitbox.position = snapped;
+
+                if (!world.touchesPlant(entity) && world.epipens >= entity.epipen_cost) {
+                    world.epipens -= entity.epipen_cost;
+                    Entity *spawned = plant_spawner_(entity.hitbox.position);
+                    world.addPlant(spawned);
+                }
+
+                entity.hitbox.position = old_position_;
             }
+
             dragging_ = false;
         }
 
@@ -267,11 +292,18 @@ public:
     }
 
 private:
+    std::function<Entity *(sf::Vector2f)> plant_spawner_;
     bool dragging_ = false;
     bool dragging_last_ = false;
     sf::Vector2f multiples_{100, 100};
     sf::Vector2f old_position_;
     sf::Vector2f offset_;
+};
+
+class StoreAttackComponent final : public AttackComponent {
+public:
+    void update(Entity &entity, World &world, float elapsed) override {}
+    void onCollision(Entity &entity, Entity &other) override {}
 };
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -293,6 +325,7 @@ public:
         }
 
         entity.hitbox.position += entity.velocity * elapsed;
+        entity.velocity *= (1 - elapsed);
 
         clicking_last_ = isPressed;
     }

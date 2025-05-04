@@ -3,6 +3,8 @@
 #include "../Components/Components.h"
 #include "SFML/System/Vector2.hpp"
 
+class PlantMovementComponent;
+
 class Entity {
 public:
     // Public attributes

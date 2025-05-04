@@ -8,7 +8,7 @@ class World {
 public:
     // Attributes
     float time = 0;
-    float epipens = 4;
+    float epipens = 10000;
 
     // Methods
     void update(const float elapsed, const sf::Vector2f &mouse_position, const bool mouse_pressed) {
@@ -23,6 +23,7 @@ public:
         update_list(plants_, elapsed);
         update_list(projectiles_, elapsed);
         update_list(zombies_, elapsed);
+        update_list(shop_elements_, elapsed);
 
         // Process collisions
         processCollisions();
@@ -46,6 +47,10 @@ public:
         return collect_drawables(projectiles_);
     }
 
+    std::vector<const sf::Drawable *> getShopItemDrawables() {
+        return collect_drawables(shop_elements_);
+    }
+
     // Getting mouse information for dragging
     [[nodiscard]] sf::Vector2f getMousePosition() const {
         return mouse_position_;
@@ -66,6 +71,10 @@ public:
 
     void addProjectile(Entity *entity) {
         projectiles_.push_back(entity);
+    }
+
+    void addShopItem(Entity *entity) {
+        shop_elements_.push_back(entity);
     }
 
     // Resolving collisions
@@ -119,6 +128,7 @@ private:
     std::vector<Entity *> plants_;
     std::vector<Entity *> zombies_;
     std::vector<Entity *> projectiles_;
+    std::vector<Entity *> shop_elements_;
     sf::FloatRect screen_hitbox_ = {{0, 0}, {1920, 1080}};
     sf::FloatRect shoot_range_ = {{0, 0}, {1500, 1080}};
     sf::FloatRect world_hitbox_ = {{0, 0}, {1900, 900}};

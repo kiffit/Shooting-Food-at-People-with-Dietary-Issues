@@ -208,7 +208,7 @@ public:
         float damage = damage_;
 
         if (entity.damage_type == other.damage_type)
-            damage *= 3;
+            damage *= 10;
 
         other.health -= damage;
         entity.health = -1;

@@ -84,7 +84,7 @@ int main() {
 
     // Create the window, must be done in the main loop
     sf::RenderWindow window(sf::VideoMode({1920, 1080}), "Shooting Food at People with Dietary Issues");
-    window.setFramerateLimit(165);
+    window.setFramerateLimit(60);
     window.setKeyRepeatEnabled(false);
 
     // Deactivate its OpenGL context
@@ -98,11 +98,13 @@ int main() {
     auto soy_minigun_plant_store = soybeanMinigunPlantStore({100, 900});
     auto baguette_launcher_plant_store = baguetteStore({200, 900});
     auto milk_store = milkStore({300, 900});
+    auto peanut_store = peanutStore({400, 900});
 
     world.addShopItem(epipen_plant_store);
     world.addShopItem(soy_minigun_plant_store);
     world.addShopItem(baguette_launcher_plant_store);
     world.addShopItem(milk_store);
+    world.addShopItem(peanut_store);
 
     // Launch the rendering thread
     std::thread thread(&renderingThread, &window, &world);
@@ -125,9 +127,11 @@ int main() {
 
         // TEMP: Zombie apocalypse
         z += elapsed.asSeconds();
-        if (z >= 0.5) {
+        if (z >= 1) {
             world.addZombie(glutenZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
             world.addZombie(soyZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
+            world.addZombie(milkZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
+            world.addZombie(peanutZombie({static_cast<float>(std::rand() % 5) * 100 + 1800, static_cast<float>(std::rand() % 9) * 100}));
             z = 0;
         }
 

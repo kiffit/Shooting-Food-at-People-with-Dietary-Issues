@@ -23,10 +23,10 @@ Read the latest team updates through [The Dietary Daily News](https://github.com
 See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf) page.
 
 ## 👨🏼‍🎨 Design Diagrams
-- [Problem Frame](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Problem-Frame(2).drawio.pdf)
+- [Problem Frame](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI_Problem_Frame(3).drawio.pdf)
 - [Level 0 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL0(2).drawio.pdf)
-- [Level 1 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL1(1).drawio.pdf)
-- [Class UMLs](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Class-UMLs(3).drawio.pdf)
+- [Level 1 Data Flow Diagram](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-DFD-LVL1(3).drawio.pdf)
+- [Class UMLs](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI-Class-UMLs(6).drawio.pdf)
 
 ## 🧑🏻‍💻 Code
 - [Main](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Code/main.cpp)

@@ -153,6 +153,23 @@ inline Entity *peanutPlant(const sf::Vector2f &position) {
     return entity;
 };
 
+// inline Entity *pistolPlant(const sf::Vector2f &position) {
+//     constexpr float interval = 0.1;
+//     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
+//     constexpr float health = 14;
+//     constexpr float epipens = 50;
+//
+//     const auto entity = new Entity(new PlantMovementComponent(),
+//                                    new PlantAttackComponent(soybeanMinigunProjectile, "../Design/Sounds/pistol.mp3", 10, interval),
+//                                    new PlantGraphicsComponent("../Design/Sprites/pistol_0.png",
+//                                                               "../Design/Sprites/pistol_1.png", interval / 2));
+//     entity->hitbox.position = position;
+//     entity->hitbox.size = hitbox_size;
+//     entity->health = health;
+//     entity->epipen_cost = epipens;
+//     return entity;
+// };
+
 /* ------------------------------------------------------------------------------------------------ */
 /* STORE PLANTS */
 /* ------------------------------------------------------------------------------------------------ */
@@ -236,6 +253,24 @@ inline Entity *peanutStore(const sf::Vector2f &position) {
     entity->epipen_cost = epipens;
     return entity;
 };
+
+// inline Entity *pistolStore(const sf::Vector2f &position) {
+//     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
+//     constexpr float health = 1000000;
+//     constexpr float epipens = 50;
+//
+//     const auto entity = new Entity(new StoreMovementComponent(pistolPlant),
+//                                    new StoreAttackComponent(),
+//                                    new PlantGraphicsComponent("../Design/Sprites/pistol_0",
+//                                                               "../Design/Sprites/pistol_1"));
+//     entity->hitbox.position = position;
+//     entity->hitbox.size = hitbox_size;
+//     entity->health = health;
+//     entity->epipen_cost = epipens;
+//     return entity;
+// };
+
+
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ZOMBIES */

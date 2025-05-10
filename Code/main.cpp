@@ -99,6 +99,7 @@ int main() {
     auto baguette_launcher_plant_store = baguetteStore({200, 900});
     auto milk_store = milkStore({300, 900});
     auto peanut_store = peanutStore({400, 900});
+    // auto pistol_plant = pistolStore({500, 900});
 
     world.addShopItem(epipen_plant_store);
     world.addShopItem(soy_minigun_plant_store);

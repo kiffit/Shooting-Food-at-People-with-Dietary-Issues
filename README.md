@@ -20,7 +20,7 @@ Read the latest team updates through [The Dietary Daily News](https://github.com
 - Braxton Rider
 - Anna Gettinger
 
-See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf) page.
+See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/unredacted_members_pages.pdf) page.
 
 ## 👨🏼‍🎨 Design Diagrams
 - [Problem Frame](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI_Problem_Frame(3).drawio.pdf)
@@ -44,5 +44,10 @@ See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietar
 - [Scope](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Scope.md)
 - [Timeline & Milestones](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Timeline)
 - [User Stories](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/User-Stories)
+
+## 🕵🏻‍♀️ Project Wrap Up
+- [Final Presentation Slides](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Final-Presentation)
+- [Final Presentation Video Script](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/final-presentation-video-script.md)
+- [Final Message](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/final-message.md)
 
 _Copywrong 2025, Eh Studios._

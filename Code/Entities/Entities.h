@@ -9,7 +9,7 @@ inline Entity *epipenProjectile(const sf::Vector2f &position) {
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr sf::Vector2f velocity = {20, -50};
 
-    const auto entity = new Entity(new ClickableMovementComponent(), new ProjectileAttackComponent(0, 6),
+    const auto entity = new Entity(new ClickableMovementComponent(), new ProjectileAttackComponent(0, 12),
                                    new ProjectileGraphicsComponent("../Design/Sprites/epipen.png"));
     entity->hitbox.position = position;
     entity->hitbox.size = hitbox_size;
@@ -69,16 +69,30 @@ inline Entity *peanutProjectile(const sf::Vector2f &position) {
     return entity;
 };
 
+inline Entity *bulletProjectile(const sf::Vector2f &position) {
+    constexpr sf::Vector2f velocity = {8000, 0};
+    constexpr sf::Vector2f hitbox_size = {PROJECTILE_HITBOX_WIDTH, PROJECTILE_HITBOX_HEIGHT};
+    constexpr float damage = 1000;
+
+    const auto entity = new Entity(new ProjectileMovementComponent(velocity), new ProjectileAttackComponent(damage),
+                                   new ProjectileGraphicsComponent("../Design/Sprites/bullet.png"));
+    entity->hitbox.position = position;
+    entity->hitbox.size = hitbox_size;
+    entity->damage_type = "death";
+    return entity;
+};
+
 /* ------------------------------------------------------------------------------------------------ */
 /* PLANTS */
 /* ------------------------------------------------------------------------------------------------ */
 inline Entity *epipenPlant(const sf::Vector2f &position) {
-    constexpr float interval = 2;
+    constexpr float interval = 14;
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 20;
 
     const auto entity = new Entity(new PlantMovementComponent(),
-                                   new PlantAttackComponent(epipenProjectile, "../Design/Sounds/epipen.mp3", 40, interval),
+                                   new PlantAttackComponent(epipenProjectile, "../Design/Sounds/epipen.mp3", 30,
+                                                            interval),
                                    new PlantGraphicsComponent("../Design/Sprites/sharps_0.png",
                                                               "../Design/Sprites/sharps_1.png"));
     entity->hitbox.position = position;
@@ -95,7 +109,8 @@ inline Entity *soybeanMinigunPlant(const sf::Vector2f &position) {
     constexpr float epipens = 10;
 
     const auto entity = new Entity(new PlantMovementComponent(),
-                                   new PlantAttackComponent(soybeanMinigunProjectile, "../Design/Sounds/soybean.mp3", 10, interval),
+                                   new PlantAttackComponent(soybeanMinigunProjectile, "../Design/Sounds/soybean.mp3",
+                                                            5, interval),
                                    new PlantGraphicsComponent("../Design/Sprites/soy_minigun_0.png",
                                                               "../Design/Sprites/soy_minigun_1.png", interval / 2));
     entity->hitbox.position = position;
@@ -111,7 +126,8 @@ inline Entity *baguettePlant(const sf::Vector2f &position) {
     constexpr float health = 8;
 
     const auto entity = new Entity(new PlantMovementComponent(),
-                                   new PlantAttackComponent(baguetteProjectile, "../Design/Sounds/pistol.mp3", 4, interval),
+                                   new PlantAttackComponent(baguetteProjectile, "../Design/Sounds/pistol.mp3", 10,
+                                                            interval),
                                    new PlantGraphicsComponent("../Design/Sprites/baguette_launcher_0.png",
                                                               "../Design/Sprites/baguette_launcher_1.png",
                                                               interval / 2));
@@ -127,7 +143,7 @@ inline Entity *milkPlant(const sf::Vector2f &position) {
     constexpr float health = 8;
 
     const auto entity = new Entity(new PlantMovementComponent(),
-                                   new PlantAttackComponent(milkProjectile, "../Design/Sounds/milk.mp3", 10, interval),
+                                   new PlantAttackComponent(milkProjectile, "../Design/Sounds/milk.mp3", 30, interval),
                                    new PlantGraphicsComponent("../Design/Sprites/milk_catapult_0.png",
                                                               "../Design/Sprites/milk_catapult_1.png",
                                                               interval / 2));
@@ -143,7 +159,8 @@ inline Entity *peanutPlant(const sf::Vector2f &position) {
     constexpr float health = 8;
 
     const auto entity = new Entity(new PlantMovementComponent(),
-                                   new PlantAttackComponent(peanutProjectile, "../Design/Sounds/pistol.mp3", 10, interval),
+                                   new PlantAttackComponent(peanutProjectile, "../Design/Sounds/pistol.mp3", 8,
+                                                            interval),
                                    new PlantGraphicsComponent("../Design/Sprites/peanut_turret_1.png",
                                                               "../Design/Sprites/peanut_turret_0.png",
                                                               interval / 2));
@@ -153,22 +170,22 @@ inline Entity *peanutPlant(const sf::Vector2f &position) {
     return entity;
 };
 
-// inline Entity *pistolPlant(const sf::Vector2f &position) {
-//     constexpr float interval = 0.1;
-//     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
-//     constexpr float health = 14;
-//     constexpr float epipens = 50;
-//
-//     const auto entity = new Entity(new PlantMovementComponent(),
-//                                    new PlantAttackComponent(soybeanMinigunProjectile, "../Design/Sounds/pistol.mp3", 10, interval),
-//                                    new PlantGraphicsComponent("../Design/Sprites/pistol_0.png",
-//                                                               "../Design/Sprites/pistol_1.png", interval / 2));
-//     entity->hitbox.position = position;
-//     entity->hitbox.size = hitbox_size;
-//     entity->health = health;
-//     entity->epipen_cost = epipens;
-//     return entity;
-// };
+inline Entity *gunPlant(const sf::Vector2f &position) {
+    constexpr float interval = 2;
+    constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
+    constexpr float health = 1;
+
+    const auto entity = new Entity(new PlantMovementComponent(),
+                                   new PlantAttackComponent(bulletProjectile, "../Design/Sounds/pistol.mp3", 30,
+                                                            interval),
+                                   new PlantGraphicsComponent("../Design/Sprites/pistol_0.png",
+                                                              "../Design/Sprites/pistol_1.png",
+                                                              interval / 2));
+    entity->hitbox.position = position;
+    entity->hitbox.size = hitbox_size;
+    entity->health = health;
+    return entity;
+};
 
 /* ------------------------------------------------------------------------------------------------ */
 /* STORE PLANTS */
@@ -254,23 +271,21 @@ inline Entity *peanutStore(const sf::Vector2f &position) {
     return entity;
 };
 
-// inline Entity *pistolStore(const sf::Vector2f &position) {
-//     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
-//     constexpr float health = 1000000;
-//     constexpr float epipens = 50;
-//
-//     const auto entity = new Entity(new StoreMovementComponent(pistolPlant),
-//                                    new StoreAttackComponent(),
-//                                    new PlantGraphicsComponent("../Design/Sprites/pistol_0",
-//                                                               "../Design/Sprites/pistol_1"));
-//     entity->hitbox.position = position;
-//     entity->hitbox.size = hitbox_size;
-//     entity->health = health;
-//     entity->epipen_cost = epipens;
-//     return entity;
-// };
+inline Entity *gunPlantStore(const sf::Vector2f &position) {
+    constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
+    constexpr float health = 1000000;
+    constexpr float epipens = 100;
 
-
+    const auto entity = new Entity(new StoreMovementComponent(gunPlant),
+                                   new StoreAttackComponent(),
+                                   new PlantGraphicsComponent("../Design/Sprites/pistol_0.png",
+                                                              "../Design/Sprites/pistol_1.png"));
+    entity->hitbox.position = position;
+    entity->hitbox.size = hitbox_size;
+    entity->health = health;
+    entity->epipen_cost = epipens;
+    return entity;
+};
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ZOMBIES */

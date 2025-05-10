@@ -271,9 +271,10 @@ public:
             if (dragging_) {
                 const sf::Vector2f rawPos = mousePos - offset_;
                 const sf::Vector2f snapped = {
-                    std::round(rawPos.x / multiples_.x) * multiples_.x,
-                    std::round(rawPos.y / multiples_.y) * multiples_.y
+                    std::round((rawPos.x - multiples_offset_.x) / multiples_.x) * multiples_.x + multiples_offset_.x,
+                    std::round((rawPos.y - multiples_offset_.y) / multiples_.y) * multiples_.y + multiples_offset_.y
                 };
+
                 entity.hitbox.position = snapped;
 
                 if (!world.touchesPlant(entity) && world.epipens >= entity.epipen_cost) {
@@ -295,7 +296,8 @@ private:
     std::function<Entity *(sf::Vector2f)> plant_spawner_;
     bool dragging_ = false;
     bool dragging_last_ = false;
-    sf::Vector2f multiples_{100, 100};
+    sf::Vector2f multiples_{110, 110};
+    sf::Vector2f multiples_offset_{10, -20};
     sf::Vector2f old_position_;
     sf::Vector2f offset_;
 };

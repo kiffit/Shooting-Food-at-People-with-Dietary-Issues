@@ -8,7 +8,7 @@ class World {
 public:
     // Attributes
     float time = 0;
-    float epipens = 10000;
+    float epipens = 4;
 
     // Methods
     void update(const float elapsed, const sf::Vector2f &mouse_position, const bool mouse_pressed) {
@@ -124,6 +124,22 @@ public:
         return false;
     }
 
+    std::vector<float> getShopEpipenValues() {
+        auto values = std::vector<float>();
+        for (const auto &shop : shop_elements_)
+            values.push_back(shop->epipen_cost);
+
+        return values;
+    }
+
+    [[nodiscard]] bool areWeCookedChat() const {
+        for (const auto &zombie : zombies_)
+            if (zombie->hitbox.findIntersection(death_hitbox))
+                return true;
+
+        return false;
+    }
+
 private:
     std::vector<Entity *> plants_;
     std::vector<Entity *> zombies_;
@@ -131,7 +147,8 @@ private:
     std::vector<Entity *> shop_elements_;
     sf::FloatRect screen_hitbox_ = {{0, 0}, {1920, 1080}};
     sf::FloatRect shoot_range_ = {{0, 0}, {1500, 1080}};
-    sf::FloatRect world_hitbox_ = {{0, 0}, {1900, 900}};
+    sf::FloatRect world_hitbox_ = {{0, 100}, {1900, 1080}};
+    sf::FloatRect death_hitbox = {{-100, 0}, {50, 900}};
     std::mutex drawables_mutex_;
 
     // Mouse attributes

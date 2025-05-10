@@ -20,7 +20,7 @@ Read the latest team updates through [The Dietary Daily News](https://github.com
 - Braxton Rider
 - Anna Gettinger
 
-See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/dietary%20team%20members.pdf) page.
+See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Team-Members/unredacted_members_pages.pdf) page.
 
 ## 👨🏼‍🎨 Design Diagrams
 - [Problem Frame](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Design/SPWDI-SFAPWDI_Problem_Frame(3).drawio.pdf)

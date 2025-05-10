@@ -45,4 +45,9 @@ See [Team Members](https://github.com/kiffit/Shooting-Food-at-People-with-Dietar
 - [Timeline & Milestones](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Timeline)
 - [User Stories](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/User-Stories)
 
+## Project Wrap Up
+- [Final Presentation Slides](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/tree/main/Documentation/Final-Presentation)
+- [Final Presentation Video Script](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/final-presentation-video-script.md)
+- [Final Message](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/final-message.md)
+
 _Copywrong 2025, Eh Studios._

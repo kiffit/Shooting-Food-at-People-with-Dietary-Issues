@@ -8,8 +8,8 @@
 ![Slide #7](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/7.jpg)
 ![Slide #8](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/8.jpg)
 ![Slide #9](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/9.jpg)
-![Slide #10](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/12.jpg)
+![Slide #10](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/10.jpg)
 ![Slide #11](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/11.jpg)
-![Slide #12](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/10.jpg)
+![Slide #12](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues/blob/main/Documentation/Final-Presentation/12.jpg)
 
 Go to [Home](https://github.com/kiffit/Shooting-Food-at-People-with-Dietary-Issues)

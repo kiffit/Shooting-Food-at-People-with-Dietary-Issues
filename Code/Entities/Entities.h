@@ -210,7 +210,7 @@ inline Entity *epipenPlantStore(const sf::Vector2f &position) {
 inline Entity *soybeanMinigunPlantStore(const sf::Vector2f &position) {
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 1000000;
-    constexpr float epipens = 10;
+    constexpr float epipens = 5;
 
     const auto entity = new Entity(new StoreMovementComponent(soybeanMinigunPlant),
                                    new StoreAttackComponent(),
@@ -226,7 +226,7 @@ inline Entity *soybeanMinigunPlantStore(const sf::Vector2f &position) {
 inline Entity *baguetteStore(const sf::Vector2f &position) {
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 1000000;
-    constexpr float epipens = 4;
+    constexpr float epipens = 2;
 
     const auto entity = new Entity(new StoreMovementComponent(baguettePlant),
                                    new StoreAttackComponent(),
@@ -242,7 +242,7 @@ inline Entity *baguetteStore(const sf::Vector2f &position) {
 inline Entity *milkStore(const sf::Vector2f &position) {
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 1000000;
-    constexpr float epipens = 6;
+    constexpr float epipens = 3;
 
     const auto entity = new Entity(new StoreMovementComponent(milkPlant),
                                    new StoreAttackComponent(),
@@ -258,7 +258,7 @@ inline Entity *milkStore(const sf::Vector2f &position) {
 inline Entity *peanutStore(const sf::Vector2f &position) {
     constexpr sf::Vector2f hitbox_size = {PLANT_HITBOX_WIDTH, PLANT_HITBOX_HEIGHT};
     constexpr float health = 1000000;
-    constexpr float epipens = 6;
+    constexpr float epipens = 3;
 
     const auto entity = new Entity(new StoreMovementComponent(peanutPlant),
                                    new StoreAttackComponent(),

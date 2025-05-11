@@ -8,7 +8,7 @@ class World {
 public:
     // Attributes
     float time = 0;
-    float epipens = 4;
+    float epipens = 6;
 
     // Methods
     void update(const float elapsed, const sf::Vector2f &mouse_position, const bool mouse_pressed) {

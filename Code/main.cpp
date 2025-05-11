@@ -152,16 +152,16 @@ int main() {
 
     // When each zombie will begin having chances to spawn
     auto initial_gluten_zombie_time = 10.f;
-    auto initial_soy_zombie_time = 20.f;
-    auto initial_milk_zombie_time = 30.f;
-    auto initial_peanut_zombie_time = 40.f;
+    auto initial_soy_zombie_time = 120.f;
+    auto initial_milk_zombie_time = 40.f;
+    auto initial_peanut_zombie_time = 90.f;
 
     // Higher scale = higher spawn rates
     auto global_time_scale = 0.01f;
     auto gluten_zombie_time_scale = 1.f;
-    auto soy_zombie_time_scale = 10.f;
-    auto milk_zombie_time_scale = 10.f;
-    auto peanut_zombie_time_scale = 10.f;
+    auto soy_zombie_time_scale = 8.f;
+    auto milk_zombie_time_scale = 3.f;
+    auto peanut_zombie_time_scale = 6.f;
 
     // Timers to keep track
     auto game_timer = 0.f;
